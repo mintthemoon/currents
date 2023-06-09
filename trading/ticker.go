@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/ericlagergren/decimal"
+	"github.com/mintthemoon/currents/math"
 )
 
 type Ticker struct {
@@ -24,9 +25,7 @@ func (t *Ticker) Reversed() *Ticker {
 		Time: t.Time,
 	}
 	if t.Price.Cmp(&decimal.Big{}) != 0 {
-		one := &decimal.Big{}
-		one.SetUint64(1)
-		r.Price.Quo(one, &t.Price)
+		r.Price.Quo(math.One, &t.Price)
 	}
 	return r
 }

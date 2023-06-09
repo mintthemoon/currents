@@ -51,12 +51,12 @@ func main() {
 			logger.Error().Err(err).Str("exchange", exchangeName).Msg("failed to initialize exchange store")
 			continue
 		}
-		exchange, err := exchange.NewExchange(exchangeName, store, logger)
+		e, err := exchange.NewExchange(exchangeName, store, logger)
 		if err != nil {
 			logger.Error().Err(err).Str("exchange", exchangeName).Msg("failed to initialize exchange")
 			continue
 		}
-		exchanges[exchangeName] = exchange
+		exchanges[exchangeName] = e
 	}
 	exchangeManager, err := exchange.NewExchangeManager(exchanges, logger)
 	if err != nil {
